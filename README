@@ -1,0 +1,17 @@
+Maximal Clique Number Lower Bound
+=================================
+https://github.com/msollami/Clique
+
+This is a randomized algorithm for computing a lower bound on the clique number of a graph.
+
+HOW TO USE
+==========
+Step 1: Compilation
+g++ chromatic.cpp -O3 -o chrom
+
+Step 2: Preprocess input graph
+Use the mathematica notebook preprocess.nb to generate the optimized data structure in binary format. Change $graphPath and $repoPath, and run notebook.
+
+Step 3: Run ./chrom
+
+
