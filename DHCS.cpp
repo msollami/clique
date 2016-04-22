@@ -106,7 +106,7 @@ bool tally(vector<int> &e, vector<int> &t, int m)
     return true;
 }
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
 
 //STEP 1: READ IN TRIPLES
@@ -139,44 +139,24 @@ triples = (int*) calloc (arraysize, sizeof(int));
 
 
 //(below) Read t#xx.txt into Triples-----------------------------------------------------------------------
-if (argc != 2)
-   {fprintf(stderr,"Usage: ./hypergraph n\n");
-   exit(1);}
-
-std::string number;
-
-for (i=1; i<argc; ++i) {    // process argument as file name
-         number = argv[i];}
-
-stringstream ss(number);  // generate file name
-ss >> entered;
-ifstream indata;
-sprintf (ac, "t%d.txt", entered);
-string s1(ac);
-
-switch(entered){
-	case 33: Needed = 12;break;
-	case 134: Needed = 4;break;
-	case 136: Needed = 15;break;
-	case 138: Needed = 14;break;
-	case 140: Needed = 24;break;
-	case 142: Needed = 38;break;
-//	case 144: Needed = 62;break;
-	case 144: Needed = 60;break;
-//	case 146: Needed = 77;break;
-	case 146: Needed = 70;break;
-	case 148: Needed = 133;break;
-	case 150: Needed = 185;break;
-	case 250: Needed = 100;break;
-	default: exit(1); break;
+if (argc == 0){
+	fprintf(stderr,"Usage: ./dhcs file\n");
+   exit(1);
 }
 
-	   file= s1.c_str();
-       indata.open(file);
-       if(!indata.is_open()) {
-          cerr << "Error: file could not be opened" << endl;
-          exit(1);
-       }
+//int max_clique = 300; //TODO
+ifstream is(argv[1]);
+if(!is.good()) {
+	cout << "Error: file could not be opened" << endl;
+	exit(1);
+}
+
+ifstream indata;
+indata.open(argv[1]);
+if(!indata) {
+  cerr << "Error: file could not be opened" << endl;
+  exit(1);
+}
 
 //      indata >> num; // read in t1xx.txt
       i=0;
@@ -310,7 +290,7 @@ max=0;
 		cout << endl << cs <<endl;
 	*/
 		if(cs==1){
-			//if(!binary_search(se.begin(), se.end(), C)) 
+			//if(!binary_search(se.begin(), se.end(), C))
 			re.push_back(C);
 			csize=C.size();
 			if(csize>max)max=csize;
@@ -416,5 +396,3 @@ cout << "Time: " << (timeb - timea)/CLOCKS_PER_SEC << endl;
 return 0;
 #endif
 }//end of main
-
-

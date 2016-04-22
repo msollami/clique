@@ -56,7 +56,7 @@ bool equal_vector(vector<int> a, vector<int> b)
 	return true;
 }
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
 
 //STEP 1: READ IN TRIPLES
@@ -85,44 +85,29 @@ if(triples==NULL) exit(1);
 
 
 //(below) Read t#xx.txt into Triples-----------------------------------------------------------------------
-if (argc != 2)
-   {fprintf(stderr,"Usage: ./hypergraph n\n");
-   exit(1);}
-
-	std::string number;
-
-	// process argument as file name
-	for (i=1; i<argc; ++i) {number = argv[i];}
-	stringstream ss(number);  // generate file name
-	ss >> entered;
-	ifstream indata;
-	sprintf (ac, "t1%d.txt", entered);
-	string s1(ac);
-
-	switch(entered){
-		case 34: Needed = 4;break;
-		case 36: Needed = 15;break;
-		case 38: Needed = 14;break;
-		case 40: Needed = 24;break;
-		case 42: Needed = 38;break;
-		case 44: Needed = 60;break;
-		case 45: Needed = 72;break;
-		case 46: Needed = 70;break;
-		case 47: Needed = 87;break;
-		case 48: Needed = 140;break;//144
-		case 50: Needed = 180;break;//186 worked
-		case 52: Needed = 240;break;
-		default: exit(1); break;
+if (argc == 0){
+	fprintf(stderr,"Usage: ./rhcs file n\n");
+	exit(1);
 }
+	int max_clique = 300; //FIXME
 
-	   file= s1.c_str();
-       indata.open(file);
-       if(!indata) {
-          cerr << "Error: file could not be opened" << endl;
-          exit(1);
-       }
+	if (argc == 3){
+   		max_clique = atoi(argv[2]);
+	}
+	ifstream is(argv[1]);
+	if(!is.good()) {
+		cout << "Error: file could not be opened" << endl;
+		exit(1);
+	}
 
-      indata >> num; // read in t1xx.txt
+	ifstream indata;
+	indata.open(argv[1]);
+	if(!indata) {
+	  cerr << "Error: file could not be opened" << endl;
+	  exit(1);
+	}
+
+	indata >> num; // read in t1xx.txt
     i=0;
     while(!indata.eof()){
       	triples[i]=num;
@@ -142,21 +127,18 @@ if (argc != 2)
 		Triples.push_back(D);
 	}
 
-//UNCOMMENT BELOW TO PRINT Triples
-	//   cout << endl << "Triples:";
-	//   for(iter_ii=Triples.begin(); iter_ii!=Triples.end(); iter_ii++)
-	//   {
-	//   	  printf("\n");
-	//      for(iter_jj=(*iter_ii).begin(); iter_jj!=(*iter_ii).end(); iter_jj++)
-	//      {
-	//         printf("%d\t",*iter_jj);
-	//      }
-	//   }
-	//   cout << endl;
-//UNCOMMENT ABOVE TO PRINT Triples
-
-
-
+	if(0){
+	  cout << endl << "Triples:";
+	  for(iter_ii=Triples.begin(); iter_ii!=Triples.end(); iter_ii++)
+	  {
+	  	  printf("\n");
+	     for(iter_jj=(*iter_ii).begin(); iter_jj!=(*iter_ii).end(); iter_jj++)
+	     {
+	        printf("%d\t",*iter_jj);
+	     }
+	  }
+	  cout << endl;
+  	}
 
 int TMAX = *max_element(D.begin(), D.end()) + 1;//Idependent of base index 0 or 1!
 cout << "Table: " << TMAX << endl;
@@ -180,7 +162,7 @@ int MMAX,NMAX,max,csize,r1,r2,cs;
 
 se.reserve(sample);   //This informs the vector of a planned increase in size, although notice that the parameter n informs of a minimum, so the resulting capacity may be any capacity equal or larger than this.
 
-se.assign(Triples.begin(), Triples.end());  
+se.assign(Triples.begin(), Triples.end());
 re.reserve(sample);
 re.clear();
 
@@ -190,7 +172,7 @@ NMAX = se.size();
 max=0;
 
 	for(j=0;j<sample;j++){
-		
+
 			C.clear();
 			r1=rand() % NMAX;
 			r2=rand() % MMAX;
@@ -200,23 +182,23 @@ max=0;
 			if(cs==1){
 				re.push_back(C);
 				csize=C.size();
-				
+
 				if(csize>max) max = csize;
-			
-				if(csize>=Needed){
-					cout << "!!!!!!!!! Solution found of length " << C.size() << " !!!!!!!!!" << endl;
+
+				if(csize>=max_clique){
+					cout << "Solution found of length " << csize << "!" << endl;
       				for(iter_jj=C.begin(); iter_jj!=C.end(); iter_jj++) cout << *iter_jj << " ";
    					cout << endl;
    					Needed++;}
-			
-				if(csize>=300){done = 1; break;}
+
+				if(csize>=max_clique){done = 1; break;}
 			}
 	}
 #if 1
 
     se.assign(re.begin(), re.end());
 	re.clear();
-	
+
 #else
 
     vector<bool> rf(re.size());
@@ -279,5 +261,3 @@ cout << "Time: " << (timeb - timea)/CLOCKS_PER_SEC << endl;
 return 0;
 
 }//end of main
-
-

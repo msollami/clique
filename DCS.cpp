@@ -24,24 +24,6 @@ int csl(vector<int> &a, vector<int> &cnt, int size)
 			int aj = a[j];
 			int m = cnt[ai * size + aj];
 			if(m == 0) return 0;
-/*
-			int l = dsp[ai * size + aj];
-			m += l;
-			for(int k = j + 1; k < n; k++)
-			{
-				int ak = a[k];
-				bool found = false;
-				while(l < m)
-				{
-					if(ak == t[l++])
-					{
-						found = true;
-						break;
-					}
-				}
-				if(!found) return 0;
-			}
-*/
 		}
 	}
 	return 1;
@@ -99,13 +81,13 @@ bool tally(vector<int> &e, vector<int> &t)
     return true;
 }
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
 //STEP 1: READ IN PAIRS
 
 //Read file into Triples-----------------------------------------------------------------------
 if (argc != 4)
-   {fprintf(stderr,"Usage: ./clique file samples clique\n");
+   {fprintf(stderr,"Usage: ./dcs file samples clique\n");
    exit(1);}
 
 	int sample = atoi(argv[2]);
@@ -293,7 +275,7 @@ max=0;
 		cout << endl << cs <<endl;
 	*/
 		if(cs==1){
-			//if(!binary_search(se.begin(), se.end(), C)) 
+			//if(!binary_search(se.begin(), se.end(), C))
 			re.push_back(C);
 			csize=C.size();
 			if(csize>max)max=csize;
@@ -399,5 +381,3 @@ cout << "Time: " << (timeb - timea)/CLOCKS_PER_SEC << endl;
 return 0;
 #endif
 }//end of main
-
-

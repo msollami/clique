@@ -40,11 +40,11 @@ bool equal_vector(vector<int> a, vector<int> b)
 	return true;
 }
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
 //Read file into Triples-----------------------------------------------------------------------
 if (argc != 4)
-   {fprintf(stderr,"Usage: ./clique file samples clique\n");
+   {fprintf(stderr,"Usage: ./rcs file samples clique\n");
    exit(1);}
 
 	int sample = atoi(argv[2]);
