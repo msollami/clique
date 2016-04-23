@@ -1,8 +1,8 @@
-# Readme
+# Clique
 
 ## About
 
-This is a randomized algorithm for computing a lower bound on the clique number of a graph.
+A package of algorithms for computing lowers bound on the clique numbers of graphs.
 
 * DCS = "Deterministic Clique Search"
 * DHCS = "Deterministic Hyperclique Search"
