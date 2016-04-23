@@ -14,22 +14,12 @@ This is a randomized algorithm for computing a lower bound on the clique number 
 ### Compilation:
 
 ```
-    make all
+$ make all
 ```
 
 ### Graphs
 
 Works with standard dimacs files:
-
-```
-$ ./dcs benchmarks/brock800_4.clq 3 12
-
-OK! 207643 Pairs Have Been Read
-799 800
-Clique: 13 | 15 56 61 264 276 282 292 401 415 467 477 619 752
-Time: 0.169433
-```
-
 
 ```
 $ ./dcs benchmarks/brock800_4.clq 3 12
